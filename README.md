@@ -102,18 +102,17 @@ Nothing to install. Browse the list on GitHub or clone the repository.
 
 Browse by section, or search the Contents. Open a profile link to see the
 person or organization behind a contribution. To suggest a person or
-organization, use the suggest-an-entry issue form with the contribution
-evidence. To request removal, use the opt-out form; no reason is needed.
+organization, use the "Suggest an entry" issue form with the contribution
+evidence. To request removal, use the "Opt-out" form; no reason is needed.
 
 ## Support
 
-- Suggest a person or organization: the suggest-an-entry issue form
-- Request removal: the opt-out issue form
-- Broken link or CI failure: the bug report issue form
-- Security: private advisory (see SECURITY.md)
+Open a [new issue](https://github.com/jgsystemsconsulting/awesome-mbse-community/issues/new/choose) and pick a form:
 
-The improvement form's filename intentionally carries a known auditor
-WARN (RR-B-32); it is accepted, not renamed.
+- Suggest a person or organization: the "Suggest an entry" form
+- Request removal: the "Opt-out" form, or the private advisory route for a request that should not be public
+- Broken link or CI failure: the "Bug report" form
+- Security: private advisory (see [SECURITY.md](SECURITY.md))
 
 ## Version
 
