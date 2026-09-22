@@ -5,6 +5,14 @@ Keep a Changelog and versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+### Fixed
+
+- Issue forms (bug report, suggest-entry, opt-out) gained the `name` and
+  `description` keys GitHub requires, so they show in the issue chooser.
+  CONTRIBUTING section 1 and the README Support section now describe the
+  shipped forms and the private advisory route; the phantom improvement-form
+  note is gone.
+
 ## [0.1.0] - 2026-09-22
 
 ### Added
