@@ -36,5 +36,5 @@ Keep a Changelog and versions follow Semantic Versioning.
 - **Security policy** moved to the private-advisory route with a People
   policy pointer (2026-09-22).
 - Repository made public on 2026-09-22 (family Checklist A); decision issue 5.
-- Cross-linked from eight sibling spokes (eight sibling spoke PRs; awesome-sparx-ea deferred
+- Cross-linked from eight sibling spokes via their PRs; awesome-sparx-ea deferred
   pending its packaging test).
