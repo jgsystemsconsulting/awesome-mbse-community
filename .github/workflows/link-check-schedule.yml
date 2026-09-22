@@ -1,0 +1,60 @@
+name: link-check (weekly)
+
+# Freshness engine: every week, find rotted links and email-shaped leaks and
+# keep exactly ONE open tracking issue. Does not fail noisily; it reports.
+# Action refs are full commit SHAs.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write # required for the close + create steps below
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Check links (report only, never fail)
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # master w/ nested-tarball install fix (>v2.8.0)
+        with:
+          lycheeVersion: v0.24.2
+          args: >-
+            --include-fragments=anchor-only
+            --max-concurrency 4
+            --accept 200..=299,429
+            --no-progress
+            README.md
+          fail: false
+          output: ./lychee/out.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Same privacy pattern as the PR gate, report-only here.
+      - name: Privacy grep (report only)
+        run: |
+          if grep -nE '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-.]+\b' README.md; then
+            echo "PRIVACY: email address found in README.md (People policy clause 3)" >> ./lychee/out.md
+          else
+            echo "Privacy grep: no email addresses in README.md" >> ./lychee/out.md
+          fi
+
+      # Stock create-issue-from-file does NOT dedupe/update, so enforce a single
+      # open report: close any existing open sweep-report issue first.
+      - name: Close previous sweep report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for n in $(gh issue list --label sweep-report --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Superseded by this week's sweep report."
+          done
+
+      - name: Open this week's sweep report
+        uses: peter-evans/create-issue-from-file@e8ef132d6df98ed982188e460ebb3b5d4ef3a9cd # v5
+        with:
+          title: "Weekly sweep report"
+          content-filepath: ./lychee/out.md
+          labels: sweep-report

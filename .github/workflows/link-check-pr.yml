@@ -1,0 +1,75 @@
+name: link-check (PR)
+
+# Gate on contributions: a dead new link fails the PR, the README must stay
+# awesome-lint conformant, and no email address may appear in the README.
+# CONTRIBUTING.md joins the path filter because the markdownlint job scopes it.
+# Action refs are full commit SHAs.
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "CONTRIBUTING.md"
+      - ".lycheeignore"
+      - ".github/workflows/link-check-pr.yml"
+
+concurrency:
+  group: link-check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check links and in-doc anchors
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # master w/ nested-tarball install fix (>v2.8.0)
+        with:
+          # --include-fragments=anchor-only validates the hand-maintained flat
+          # Contents ToC. GITHUB_TOKEN authenticates the github.com profile
+          # links so many profile checks avoid the 60 req/hr anonymous limit.
+          lycheeVersion: v0.24.2
+          args: >-
+            --include-fragments=anchor-only
+            --max-concurrency 4
+            --accept 200..=299,429
+            --no-progress
+            README.md
+          fail: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  awesome-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+      - name: Awesome-list manifest conformance
+        # Pin from awesome-sysml-v2/.github/workflows/lint.yml (the hub itself
+        # runs awesome-lint unpinned; this spoke copies the spoke pin).
+        run: npx awesome-lint@2.3.0 README.md
+
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+      - name: Markdown lint (README + CONTRIBUTING)
+        run: npx -y markdownlint-cli2 "README.md" "CONTRIBUTING.md"
+
+  privacy-grep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: No email addresses in README (People policy clause 3)
+        run: |
+          if grep -nE '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-.]+\b' README.md; then
+            echo "::error::Email address found in README.md; People policy clause 3 forbids it."
+            exit 1
+          fi
