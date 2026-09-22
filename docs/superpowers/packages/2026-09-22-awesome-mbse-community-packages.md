@@ -19,7 +19,7 @@ P5, P6.
 - **id:** P1
 - **name:** issue-intake-surface
 - **size:** M
-- **status:** in-flight
+- **status:** done
 - **deps:** none
 - **corroboration:** 3 (value, risk, cohesion)
 - **promoted_ids:** b-14
