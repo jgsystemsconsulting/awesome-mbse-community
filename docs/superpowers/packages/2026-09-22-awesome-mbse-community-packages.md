@@ -61,7 +61,7 @@ contributor-facing CI, runbook, and gate packages assume those links work.
 - **id:** P4
 - **name:** release-gate-truth
 - **size:** M
-- **status:** proposed
+- **status:** in-flight
 - **deps:** none
 - **corroboration:** 3 (risk, cohesion)
 - **promoted_ids:** b-01, b-03
