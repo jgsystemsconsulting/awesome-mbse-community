@@ -1,1 +1,4 @@
 https://www\.incose\.org/
+# https://www.incose.org/ excluded 2026-09-22: WAF bot-blocks anonymous
+# link checkers (verified live in a browser). Remove this line when the
+# host serves anonymous requests again.

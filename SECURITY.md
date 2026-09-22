@@ -1,12 +1,20 @@
 # Security Policy
 
-This repository is a curated index of links — it ships no executable product. The main
-security surface is the links it points to and the CI workflows.
+## Supported surfaces
+
+This repository is a curated content list with CI. In scope: malicious or
+hijacked links in the README, and attacks on the CI workflows. Everything
+else (entry disputes, corrections, removal requests) is out of scope here.
 
 ## Reporting
 
-If you find a malicious, hijacked, or compromised linked resource, or an issue with the
-repository's automation, report it privately to **support@jgsystemsconsulting.com**.
+Report privately through GitHub security advisories:
 
-Please do not open a public issue for a suspected malicious link until it has been
-reviewed. We aim to acknowledge reports within a few business days.
+https://github.com/jgsystemsconsulting/awesome-mbse-community/security/advisories/new
+
+For non-sensitive issues, a pull request with the fix is welcome. We aim
+to acknowledge reports within 7 days.
+
+Requests to remove or correct a person or organization entry follow the
+People policy in CONTRIBUTING.md; the advisory channel above is accepted
+as a private route for those requests.

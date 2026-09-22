@@ -1,0 +1,19 @@
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Report a broken or hijacked link, or a CI failure.
+  - type: input
+    id: what
+    attributes:
+      label: What is broken
+      placeholder: The link on line N points to a parked domain
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Entry or workflow URL
+    validations:
+      required: true

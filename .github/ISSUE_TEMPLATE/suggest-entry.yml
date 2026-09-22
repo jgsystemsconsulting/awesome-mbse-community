@@ -1,0 +1,53 @@
+title: "[Suggest] "
+labels: [entry]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Suggest a person or organization. Entries list public professional
+        contributions only. The five-point inclusion bar is CONTRIBUTING.md
+        section 2.
+  - type: input
+    id: name
+    attributes:
+      label: Display name
+    validations:
+      required: true
+  - type: input
+    id: profile
+    attributes:
+      label: Public profile URL
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Target section
+      options:
+        - Individual practitioners
+        - Companies and vendors
+        - Academic and research groups
+        - Community organizations and standards bodies
+    validations:
+      required: true
+  - type: input
+    id: evidence
+    attributes:
+      label: One contribution evidence URL
+      description: The named, checkable free or open contribution that qualifies
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it meets the five-point bar
+      description: On-topic, substantive, live, not duplicative, legally linkable (CONTRIBUTING.md section 2)
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public professional information only, no personal contact details
+      options:
+        - label: Confirmed
+          required: true

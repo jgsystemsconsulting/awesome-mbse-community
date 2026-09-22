@@ -4,8 +4,7 @@
 
 ![Last full sweep: 2026-09](https://img.shields.io/badge/last%20full%20sweep-2026--09-brightgreen)
 
-Part of the [awesome-mbse list
-family](https://github.com/jgsystemsconsulting/awesome-mbse/blob/main/FAMILY.md).
+Part of the [awesome-mbse list family](https://github.com/jgsystemsconsulting/awesome-mbse/blob/main/FAMILY.md).
 
 Maintained by [JG Systems Consulting Ltd.](https://github.com/jgsystemsconsulting/awesome-mbse).
 See [Editorial neutrality](CONTRIBUTING.md#editorial-neutrality).
@@ -19,6 +18,10 @@ Inclusion rules and opt-out: [People policy](CONTRIBUTING.md#people-policy).
 - [Companies and vendors](#companies-and-vendors)
 - [Academic and research groups](#academic-and-research-groups)
 - [Community organizations and standards bodies](#community-organizations-and-standards-bodies)
+- [Install](#install)
+- [Usage](#usage)
+- [Support](#support)
+- [Version](#version)
 
 ## Individual practitioners
 
@@ -90,3 +93,30 @@ Inclusion rules and opt-out: [People policy](CONTRIBUTING.md#people-policy).
 - [PDES, Inc.](https://pdesinc.org/) - Industry consortium advancing STEP and product-data exchange standards `community-org` `DE` `standards` `standard` (2026).
 - [prostep ivip](https://www.prostep-ivip.org/) - Association publishing digital process-chain and interoperability community work `community-org` `DE` `community` (2026).
 - [The Open Group](https://www.opengroup.org/archimate-forum/archimate-overview) - Publishes the ArchiMate architecture-modeling standard and forum resources `community-org` `Archimate` `standards` `standard` (2026).
+
+## Install
+
+Nothing to install. Browse the list on GitHub or clone the repository.
+
+## Usage
+
+Browse by section, or search the Contents. Open a profile link to see the
+person or organization behind a contribution. To suggest a person or
+organization, use the suggest-an-entry issue form with the contribution
+evidence. To request removal, use the opt-out form; no reason is needed.
+
+## Support
+
+- Suggest a person or organization: the suggest-an-entry issue form
+- Request removal: the opt-out issue form
+- Broken link or CI failure: the bug report issue form
+- Security: private advisory (see SECURITY.md)
+
+The improvement form's filename intentionally carries a known auditor
+WARN (RR-B-32); it is accepted, not renamed.
+
+## Version
+
+See CHANGELOG for versions and the release history. Licence CC0-1.0
+(LICENSE); licensing enquiries:
+[licensing page](https://labs.jgsystemsconsulting.com/licensing.html).

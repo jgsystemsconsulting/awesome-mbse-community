@@ -1,0 +1,11 @@
+# OS cruft
+Thumbs.db
+.DS_Store
+# Python
+__pycache__/
+.venv/
+# Tool caches
+.lycheecache/
+.playwright-mcp/
+*.bak
+.zcode/

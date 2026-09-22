@@ -1,0 +1,12 @@
+title: "[Opt-out] "
+labels: [opt-out]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Request removal of a person or organization entry. No reason is
+        needed. Removal is unconditional.
+  - type: input
+    id: entry
+    attributes:
+      label: Entry name as written in README (optional)

@@ -3,6 +3,8 @@
 Maintenance sweeps and notable changes to this list. The format follows
 Keep a Changelog and versions follow Semantic Versioning.
 
+## [Unreleased]
+
 ## [0.1.0] - 2026-09-22
 
 ### Added
@@ -27,3 +29,9 @@ Keep a Changelog and versions follow Semantic Versioning.
   data, opt-out with a private register, corrections, 3-year staleness prune).
 - **Registry status**: Live at 59 verified entries; growth continues at the
   first sweep.
+- **Release packaging**: COPYRIGHT, NOTICE, CITATION.cff, RELEASE-INFO.txt,
+  .gitignore, distribution ledger, issue forms (bug report, suggest-entry,
+  opt-out), PR template, release gate workflow and check script, and the
+  docs landing page (2026-09-22).
+- **Security policy** moved to the private-advisory route with a People
+  policy pointer (2026-09-22).
