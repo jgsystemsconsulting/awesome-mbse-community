@@ -6,17 +6,24 @@ Thanks for helping keep this the definitive directory of the people and
 organizations behind free and open systems-engineering and MBSE knowledge. Read
 this before opening a PR; the CI gates enforce most of it.
 
-The fastest path: open an issue naming the person or org and the evidence,
+The fastest path: open the "Suggest an entry" issue form with the evidence,
 or open a pull request that edits `README.md` directly.
 
 ## 1. How to suggest a person or org
 
-- **Issue:** open an issue titled after the person or org and include the
-  evidence: the named, checkable contribution that qualifies.
-- **PR:** edit `README.md`, follow the entry format below, and describe the
-  evidence in the PR body. (Structured issue and PR templates arrive with a
-  later effort.) CI link-checks the entry, lints the list, and runs the
-  privacy grep.
+- **Issue:** open a [new issue](https://github.com/jgsystemsconsulting/awesome-mbse-community/issues/new/choose)
+  and pick the "Suggest an entry" form. It asks for the display name, the
+  public profile URL, the target section, one contribution evidence URL, why
+  the entry meets the five-point bar (section 2), and the required
+  confirmation that the evidence shows only public professional info.
+- **PR:** edit `README.md`, follow the entry format below, describe the
+  evidence in the PR body, and tick the PR template checklist. CI link-checks
+  the entry, lints the list, and runs the privacy grep.
+
+The same chooser holds the "Bug report" form (broken or hijacked link, CI
+failure) and the "Opt-out" form (removal of a person or organization entry,
+People policy clause 4). Security reports go through the private advisory
+route in SECURITY.md.
 
 ## 2. Inclusion bar
 
