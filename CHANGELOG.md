@@ -35,3 +35,6 @@ Keep a Changelog and versions follow Semantic Versioning.
   docs landing page (2026-09-22).
 - **Security policy** moved to the private-advisory route with a People
   policy pointer (2026-09-22).
+- Repository made public on 2026-09-22 (family Checklist A); decision issue 5.
+- Cross-linked from eight sibling spokes (Task 9 PRs; awesome-sparx-ea deferred
+  pending its packaging test).
