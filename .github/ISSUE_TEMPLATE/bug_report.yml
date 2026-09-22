@@ -1,3 +1,5 @@
+name: Bug report
+description: Report a broken or hijacked link, or a CI failure.
 title: "[Bug] "
 labels: [bug]
 body:

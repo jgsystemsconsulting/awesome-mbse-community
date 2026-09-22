@@ -1,3 +1,5 @@
+name: Opt-out
+description: Ask for removal of a person or organization entry. No reason needed.
 title: "[Opt-out] "
 labels: [opt-out]
 body:
@@ -5,7 +7,9 @@ body:
     attributes:
       value: >
         Request removal of a person or organization entry. No reason is
-        needed. Removal is unconditional.
+        needed. Removal is unconditional. For a request that should not be
+        public, use the Security advisory link in the issue chooser instead
+        (see SECURITY.md).
   - type: input
     id: entry
     attributes:

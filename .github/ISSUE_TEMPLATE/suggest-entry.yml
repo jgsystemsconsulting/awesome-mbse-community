@@ -1,3 +1,5 @@
+name: Suggest an entry
+description: Propose a person or organization, with one checkable contribution as evidence.
 title: "[Suggest] "
 labels: [entry]
 body:
