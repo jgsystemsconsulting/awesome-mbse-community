@@ -145,7 +145,7 @@ the landing-chip gate.
 - **id:** P3
 - **name:** entry-policy-gates
 - **size:** M
-- **status:** proposed
+- **status:** in-flight
 - **deps:** [P2]
 - **corroboration:** 2 (value, risk)
 - **promoted_ids:** []
