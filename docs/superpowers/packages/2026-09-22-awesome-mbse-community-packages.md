@@ -105,10 +105,11 @@ documents how to run it locally, and P2 builds contributor docs on top.
 - **id:** P2
 - **name:** align-contribution-path-docs
 - **size:** M
-- **status:** proposed
+- **status:** done
 - **deps:** [P1, P4]
 - **corroboration:** 1 (value)
 - **promoted_ids:** []
+- **absorption note:** Done via absorption. P1 (PR #6) rewrote CONTRIBUTING section 1 around the shipped forms; P4 (PR #7) added the landing-chip/version-file duty to CONTRIBUTING and the PR template. No residual scope.
 
 CONTRIBUTING's how-to-suggest path and the PR checklist omit the
 landing-chip and check_release gate duties that validate.yml enforces on
