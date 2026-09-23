@@ -3,8 +3,8 @@
 """Release gate (RR-B-15): required files, forbidden paths, forbidden
 content, headers present. Exits non-zero on any failure.
 
-Adapted for awesome-stpa (RR-B Base, standalone model): no src/ layout,
-no package install, no scripts beyond the gate itself."""
+Standalone model for awesome-mbse-community: no src/ layout, no package
+install, no scripts beyond the gate itself."""
 import pathlib
 import re
 import subprocess
@@ -88,6 +88,34 @@ if release_info is not None:
             fails.append(
                 f"landing version chip {chip_version} != RELEASE-INFO Version {version_hits[0]}"
             )
+        # inside the existing else branch that guards version_hits[0]
+        citation = read_source("CITATION.cff")
+        if citation is not None:
+            cff_hits = re.findall(r'(?:^version:\s*)"?([^"\s]+)"?\s*$', citation, re.M)
+            if len(cff_hits) != 1:
+                fails.append(
+                    f"CITATION.cff version missing or ambiguous: {len(cff_hits)} matches"
+                )
+            elif cff_hits[0] != version_hits[0]:
+                fails.append(
+                    f"CITATION.cff version {cff_hits[0]} != RELEASE-INFO Version {version_hits[0]}"
+                )
+        tag_hits = re.findall(r"(?m)^Tag: v(\S+)\s*$", release_info)
+        if len(tag_hits) != 1:
+            fails.append(
+                f"RELEASE-INFO Tag missing or not in 'Tag: v<version>' format: {len(tag_hits)} matches"
+            )
+        elif tag_hits[0] != version_hits[0]:
+            fails.append(f"RELEASE-INFO Tag v{tag_hits[0]} != Version {version_hits[0]}")
+        changelog = read_source("CHANGELOG.md")
+        if changelog is not None:
+            rel = re.findall(r"(?m)^## \[(\d+\.\d+\.\d+)\]", changelog)
+            if not rel:
+                fails.append("CHANGELOG has no semver release section")
+            elif rel[0] != version_hits[0]:
+                fails.append(
+                    f"CHANGELOG newest release {rel[0]} != RELEASE-INFO Version {version_hits[0]}"
+                )
 
 if readme is not None:
     sweep_hits = re.findall(r"!\[Last full sweep: (\d{4}-\d{2})\]", readme)
