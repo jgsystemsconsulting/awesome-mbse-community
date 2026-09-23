@@ -88,7 +88,6 @@ if release_info is not None:
             fails.append(
                 f"landing version chip {chip_version} != RELEASE-INFO Version {version_hits[0]}"
             )
-        # inside the existing else branch that guards version_hits[0]
         citation = read_source("CITATION.cff")
         if citation is not None:
             cff_hits = re.findall(r'(?:^version:\s*)"?([^"\s]+)"?\s*$', citation, re.M)
