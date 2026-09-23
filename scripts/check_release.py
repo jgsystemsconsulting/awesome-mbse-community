@@ -135,12 +135,112 @@ CURATED_SECTIONS = (
 )
 ENTRY_RX = re.compile(r"^- \[[^\]]+\]\(https?://[^)\s]+\)\s+-\s+.+\(\d{4}\)\.$")
 
+WHO_BY_SECTION = {
+    "Individual practitioners": "individual",
+    "Companies and vendors": "company",
+    "Academic and research groups": "research-group",
+    "Community organizations and standards bodies": "community-org",
+}
+AXIS_RANK = {"who": 0, "domain": 1, "tool": 2, "contribution": 3, "standard": 4}
+CARDINALITY = {"who": 1, "domain": 1, "tool": None, "contribution": 1, "standard": (0, 1)}
+VOCAB = {
+    "who": {"individual", "company", "research-group", "community-org"},
+    "domain": {
+        "MBSE-general", "SysMLv2", "SysML-general", "Capella", "Archimate",
+        "EA", "RE", "STPA", "DE",
+    },
+    "tool": {
+        "Cameo", "CATIA-Magic", "Capella", "Archi", "Sparx-EA", "SysON", "other-tool",
+    },
+    "contribution": {
+        "open-source", "model", "course", "book", "paper", "blog", "video",
+        "standards", "community",
+    },
+    "standard": {"standard"},
+}
+
+
+def check_entry_policy(section, line):
+    """Append failures for entry policy violations; return the casefolded link text."""
+    body = line[2:]
+    link_text = body[1:body.index("](")]
+    # tag run: strip the trailing "(YYYY)." year token first, then collect
+    # trailing backticked tokens backward
+    m_year = re.search(r"\s*\(\d{4}\)\.$", body)
+    if not m_year:
+        # unreachable for ENTRY_RX matches; defensive, keeps fail-closed
+        fails.append(f"missing tags in {section}: {line[:60]}")
+        return link_text.casefold()
+    core = body[:m_year.start()].rstrip()
+    tokens = []
+    m = re.search(r"`([^`]+)`$", core)
+    while m:
+        tokens.append(m.group(1))
+        core = core[:m.start()].rstrip()
+        m = re.search(r"`([^`]+)`$", core)
+    tokens.reverse()
+    if not tokens:
+        fails.append(f"missing tags in {section}: {line[:60]}")
+        return link_text.casefold()
+    unknown = [t for t in tokens if not any(t in v for v in VOCAB.values())]
+    for t in unknown:
+        fails.append(f"unknown tag in {section}: {t} ({line[:60]})")
+    if unknown:
+        return link_text.casefold()
+    # axis assignment: lowest rank that keeps the sequence non-decreasing
+    # and satisfies cardinality (resolves dual-axis tokens like Capella)
+    axes = []
+    counts = dict.fromkeys(AXIS_RANK, 0)
+    prev_rank = -1
+    for t in tokens:
+        placed = None
+        for r, a in sorted((AXIS_RANK[a], a) for a in AXIS_RANK if t in VOCAB[a]):
+            if r < prev_rank:
+                continue
+            cap = CARDINALITY[a]
+            if cap is not None:
+                limit = cap[1] if isinstance(cap, tuple) else cap
+                if counts[a] >= limit:
+                    continue
+            placed = a
+            break
+        if placed is None:
+            fails.append(f"tag order or cardinality in {section}: {tokens}")
+            return link_text.casefold()
+        axes.append(placed)
+        counts[placed] += 1
+        prev_rank = AXIS_RANK[placed]
+    if counts["who"] != 1 or counts["domain"] != 1 or counts["contribution"] != 1:
+        fails.append(f"tag order or cardinality in {section}: {tokens}")
+        return link_text.casefold()
+    if tokens[0] != WHO_BY_SECTION[section]:
+        fails.append(f"who tag {tokens[0]} does not match section {section}")
+    # description: after the " - " separator that follows the link's closing
+    # paren, up to the tag run (rfind: the tag run is the trailing occurrence)
+    paren_close = body.index(")", body.index("]("))
+    desc_zone = body[paren_close + 1:]
+    m_sep = re.match(r"\s+-\s+", desc_zone)
+    desc_start = m_sep.end() if m_sep else 0
+    tag_zone = desc_zone.rfind("`" + tokens[0] + "`")
+    desc = desc_zone[desc_start:tag_zone].strip() if tag_zone != -1 else desc_zone[desc_start:].strip()
+    if len(desc) > 140:
+        fails.append(f"description over 140 chars in {section} ({len(desc)})")
+    if len(re.findall(r"\]\(https?://[^)]+\)", line)) > 1:
+        fails.append(f"second hyperlink in {section} ({line[:60]})")
+    bare = re.sub(r"\[[^\]]*\]\([^)]*\)", "", line)
+    bare = re.sub(r"`[^`]*`", "", bare)
+    if re.search(r"https?://\S+", bare):
+        fails.append(f"bare URL in {section} ({line[:60]})")
+    return link_text.casefold()
+
 
 def curated_walk(readme):
     """Count grammar-valid bullets under curated headings and tally exact ## hits."""
     count = 0
     heading_hits = {title: 0 for title in CURATED_SECTIONS}
     current = None
+    prev = None
+    prev_name = None
     in_fence = False
     for raw in readme.splitlines():
         line = raw.strip()
@@ -153,6 +253,8 @@ def curated_walk(readme):
         if stripped.startswith("## ") and not stripped.startswith("###"):
             # Exact presence uses stripped == "## " + title for curated titles only
             current = stripped[3:].strip()
+            prev = None
+            prev_name = None
             if stripped == "## " + current and current in heading_hits:
                 heading_hits[current] += 1
             continue
@@ -160,6 +262,15 @@ def curated_walk(readme):
             probe = "- " + line[2:] if line.startswith("* ") else line
             if ENTRY_RX.match(probe):
                 count += 1
+                body = probe[2:]
+                probe_name = body[1:body.index("](")]
+                folded = check_entry_policy(current, probe)
+                if prev is not None and folded < prev:
+                    fails.append(
+                        f"entries out of alphabetical order in {current}: "
+                        f"{prev_name} > {probe_name}"
+                    )
+                prev, prev_name = folded, probe_name
             else:
                 fails.append(f"curated entry malformed in {current}: {line[:60]}")
     return count, heading_hits
