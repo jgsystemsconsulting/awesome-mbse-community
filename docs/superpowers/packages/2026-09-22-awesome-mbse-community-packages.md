@@ -185,7 +185,7 @@ neutrality and format bar as external PRs land.
 - **id:** P5
 - **name:** pin-markdownlint-runbook
 - **size:** S
-- **status:** proposed
+- **status:** done
 - **deps:** none
 - **corroboration:** 1 (risk)
 - **promoted_ids:** []
