@@ -191,6 +191,17 @@ docker run --rm -v "$PWD:/d" -w /d lycheeverse/lychee --include-fragments anchor
 
 Or open a **draft PR** and let CI check it for you.
 
+## Landing page and version files
+
+`docs/index.html` is a derived copy. `README.md` is the source of truth for
+the sweep badge, curated sections, and entry count; `RELEASE-INFO.txt` is the
+source for the version. When a PR adds or removes an entry, or touches
+version files, update the landing chips (`entries`, `sweep`, `version`) and
+the section-index list to match. The same applies when only the README sweep
+badge changes: update the `sweep` chip. The release gate in CI fails
+otherwise. CHANGELOG, RELEASE-INFO.txt, and CITATION.cff carry the same
+version on every release.
+
 ## Maintenance cadence
 
 The maintainers run a **quarterly sweep** (add, verify, prune per People policy
