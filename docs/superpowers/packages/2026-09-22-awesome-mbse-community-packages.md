@@ -216,7 +216,7 @@ branch-protection policy.
 - **id:** P6
 - **name:** pr-lint-local-runbook
 - **size:** S
-- **status:** proposed
+- **status:** done
 - **deps:** [P4]
 - **corroboration:** 1 (cohesion)
 - **promoted_ids:** b-07, b-15
