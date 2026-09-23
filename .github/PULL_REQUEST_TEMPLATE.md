@@ -1,4 +1,4 @@
 - [ ] Entries untouched, or bar evidence given for every change
 - [ ] Links checked (CI runs the link check on this PR)
 - [ ] No personal data, no email addresses, no em dashes
-- [ ] Version files (CHANGELOG, RELEASE-INFO, CITATION) updated together
+- [ ] Version files (CHANGELOG, RELEASE-INFO, CITATION) updated together, and docs/index.html chips matched (entries, sweep, version)
