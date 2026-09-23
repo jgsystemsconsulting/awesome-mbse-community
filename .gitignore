@@ -9,3 +9,12 @@ __pycache__/
 .playwright-mcp/
 *.bak
 .zcode/
+# Superpowers SDD scratch workspaces
+.superpowers/
+# Tool caches the release gate forbids as tracked paths
+.pytest_cache/
+.ruff_cache/
+.worktrees/
+# Office/LibreOffice lock files (OneDrive checkout)
+~$*
+.~lock.*#
