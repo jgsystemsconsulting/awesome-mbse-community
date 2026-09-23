@@ -181,12 +181,29 @@ SysML/Cameo consulting and tooling. To keep it trustworthy:
    The hub's Model Gallery section does not apply here (this list holds no
    model entries).
 
-## Local link-check
+## Local checks
 
-No install needed; check your changed links with Docker:
+Run the same checks CI runs. Docker is needed only for the link check;
+everything else needs Node 20, Python 3 (standard library only), and GNU grep
+(Linux, WSL, or Git Bash).
 
 ```sh
-docker run --rm -v "$PWD:/d" -w /d lycheeverse/lychee --include-fragments anchor-only README.md
+# Link check (README). Set a token first to avoid github.com rate limits:
+#   export GITHUB_TOKEN=<your token>
+docker run --rm -v "$PWD:/d" -w /d -e GITHUB_TOKEN lycheeverse/lychee \
+  --include-fragments anchor-only --accept 200..=299,429 README.md
+
+# Awesome-list lint (mandatory; -y skips the npx install prompt CI does not have):
+npx -y awesome-lint@2.3.0 README.md
+
+# Markdown lint:
+npx -y markdownlint-cli2@0.23.3 "README.md" "CONTRIBUTING.md"
+
+# Privacy grep (People policy clause 3; must print nothing):
+grep -nE '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-.]+\b' README.md
+
+# Release gate:
+python scripts/check_release.py
 ```
 
 Or open a **draft PR** and let CI check it for you.
