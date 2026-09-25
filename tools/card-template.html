@@ -1,0 +1,73 @@
+<!doctype html><html><head><meta charset='utf-8'><style>
+@font-face { font-family:'JetBrains Mono'; src:url('file:///__FONTDIR__/jetbrains-mono-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'JetBrains Mono'; src:url('file:///__FONTDIR__/jetbrains-mono-700.woff2') format('woff2'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('file:///__FONTDIR__/inter-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('file:///__FONTDIR__/inter-600.woff2') format('woff2'); font-weight:600; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1280px; height:720px; background:#0a0a0b; color:#f4f2ec; font-family:'Inter',sans-serif; overflow:hidden; position:relative;
+  background-image:repeating-linear-gradient(0deg,transparent 0 39px,#161618 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,#161618 39px 40px); }
+.frame { position:absolute; inset:28px; border:1px solid #2a2a2d; }
+.tick { position:absolute; width:14px; height:14px; border-color:#f4f2ec; border-style:solid; border-width:0; }
+.tick.tl { top:22px; left:22px; border-top-width:2px; border-left-width:2px; }
+.tick.tr { top:22px; right:22px; border-top-width:2px; border-right-width:2px; }
+.tick.bl { bottom:22px; left:22px; border-bottom-width:2px; border-left-width:2px; }
+.tick.br { bottom:22px; right:22px; border-bottom-width:2px; border-right-width:2px; }
+.inner { position:absolute; inset:28px; padding:38px 52px 30px; display:flex; flex-direction:column; }
+.top { display:flex; align-items:center; gap:18px; }
+.emblem { width:56px; height:56px; }
+.brand { font-family:'JetBrains Mono',monospace; font-size:17px; letter-spacing:.16em; text-transform:uppercase; color:#8a8782; }
+.ver { margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:17px; color:#8a8782; }
+.rule { height:1px; background:#2a2a2d; margin:20px 0 26px; }
+.cols { flex:1; }
+.left { width:100%; }
+.kicker { font-family:'JetBrains Mono',monospace; font-size:19px; letter-spacing:.22em; text-transform:uppercase; color:#8a8782; }
+.h { margin-top:26px; font-family:'JetBrains Mono',monospace; font-size:64px; font-weight:700; line-height:1; letter-spacing:-.01em; }
+.sub { margin-top:20px; font-size:23px; line-height:1.5; color:#d8d5cd; }
+.facts { margin-top:34px; }
+.fact { display:flex; align-items:baseline; gap:12px; padding:13px 0; border-bottom:1px solid #1c1c1f; font-family:'JetBrains Mono',monospace; font-size:20px; }
+.fact i { font-style:normal; color:#8a8782; font-size:15px; }
+.right { flex:1; }
+.panel { border:1px solid #2a2a2d; background:#0e0e10; }
+.phead { display:flex; align-items:center; gap:8px; padding:12px 18px; border-bottom:1px solid #2a2a2d; }
+.dot { width:9px; height:9px; border-radius:50%; background:#2a2a2d; }
+.ptitle { margin-left:8px; font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#8a8782; }
+.prow { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid #1c1c1f; }
+.prow:last-child { border-bottom:none; }
+.pname { font-family:'JetBrains Mono',monospace; font-size:18px; }
+.pwhat { font-family:'JetBrains Mono',monospace; font-size:13px; color:#8a8782; margin-top:4px; }
+.pass { font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; color:#f4f2ec; border:1px solid #f4f2ec; padding:4px 9px; border-radius:3px; }
+.qr-plate { position:absolute; right:52px; bottom:30px; background:#f4f2ec; padding:10px; border-radius:6px; }
+.qr-plate img { display:block; width:104px; height:104px; image-rendering:pixelated; }
+.qr-label { position:absolute; right:52px; bottom:12px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#8a8782; letter-spacing:.1em; text-transform:uppercase; }
+.foot { display:flex; justify-content:space-between; align-items:baseline; padding-top:16px; margin-top:auto; } font-family:'JetBrains Mono',monospace; font-size:17px; }
+.foot .url { color:#f4f2ec; }
+.foot .lic { color:#8a8782; }
+</style></head><body>
+<div class="frame"></div>
+<div class="tick tl"></div><div class="tick tr"></div><div class="tick bl"></div><div class="tick br"></div>
+<div class="inner">
+  <div class="top">
+    <img class="emblem" src="file:///__EMBLEM__" alt="">
+    <div class="brand">JG Systems Consulting Ltd</div>
+    
+  </div>
+  <div class="rule"></div>
+  <div class="h">__NAME__</div>
+  <div class="cols" style="margin-top:24px;">
+    <div class="left">
+      <div class="kicker">__KICKER__</div>
+      <div class="sub" style="margin-top:14px;">__TAGLINE__</div>
+      <div class="facts">
+__FACTS__
+      </div>
+    </div>
+    <div class="foot">
+    <div>
+      <div class="url">__URL__</div>
+      <div class="lic" style="margin-top:6px;">__LICNOTE__</div>
+    </div>
+  </div>
+  <div class="qr-plate"><img src="file:///__QR__" alt="QR code linking to the GitHub repository"></div>
+  <div class="qr-label">scan for repo</div>
+</div>
+</body></html>

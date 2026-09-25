@@ -1,0 +1,75 @@
+<!doctype html>
+<!-- Copyright (c) 2026 JG Systems Consulting Ltd. See LICENSE. -->
+<!-- Built from the jgs-site-template shell: edit site.config.json, run tools/build.py. -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>{{PAGE_TITLE}}</title>
+<meta name="description" content="{{OG_DESCRIPTION}}">
+<link rel="canonical" href="{{PAGES_BASE}}/">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="stylesheet" href="site.css?v=20260925b">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{PAGES_BASE}}/">
+<meta property="og:title" content="{{DISPLAY_NAME}}">
+<meta property="og:description" content="{{OG_DESCRIPTION}}">
+<meta property="og:image" content="{{PAGES_BASE}}/title-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{DISPLAY_NAME}}">
+<meta name="twitter:description" content="{{OG_DESCRIPTION}}">
+<meta name="twitter:image" content="{{PAGES_BASE}}/title-card.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"{{DISPLAY_NAME}}","applicationCategory":"DeveloperApplication","operatingSystem":"Any","softwareVersion":"{{REV}}","license":"{{LICENSE_URL}}","url":"{{PAGES_BASE}}/","codeRepository":"{{REPO_URL}}","author":{"@type":"Organization","name":"{{AUTHOR_ORG}}"}}
+</script>
+</head>
+<body>
+
+<header class="masthead"><div class="wrap">
+  <span>CLASSIFICATION: <b>{{CLASSIFICATION}}</b></span>
+  <span>LICENCE: <b>{{LICENCE_LABEL}}</b></span>
+  <span>DOC-ID: <b>{{DOC_ID}}</b></span>
+  <span>REV <b>{{REV}}</b></span>
+</div></header>
+
+<nav class="site" aria-label="Site"><div class="wrap">
+  <a class="brand" href="index.html" aria-label="JG Systems Consulting home"><img src="images/jgs-emblem.png" alt="" width="28" height="28"></a>
+  {{NAV_ITEMS}}
+</nav>
+
+<main>
+<div class="hero"><div class="wrap">
+  <h1>{{DISPLAY_NAME}}</h1>
+  <div class="hero-grid">
+  <div class="hero-copy">
+    <p>{{HERO_LEAD}}</p>
+  <p class="sub">{{HERO_SUB}}</p>
+    <div class="cta">{{CTAS}}</div>
+  </div>
+  <div class="hero-media">
+    <a href="{{REPO_URL}}" aria-label="{{DISPLAY_NAME}} on GitHub">
+      <img src="title-card.png?v=5" alt="{{DISPLAY_NAME}} overview card" width="1280" height="720">
+    </a>
+  </div>
+  </div>
+</div></div>
+
+{{SECTIONS}}
+
+</main>
+<footer><div class="wrap">
+  <div class="tblock">
+  {{FOOTER_CELLS}}
+  </div>
+  {{FOOTER_NOTE_PLACEHOLDER}}
+</div></footer>
+
+</body>
+</html>
