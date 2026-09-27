@@ -18,3 +18,4 @@ __pycache__/
 # Office/LibreOffice lock files (OneDrive checkout)
 ~$*
 .~lock.*#
+docs/superpowers/
